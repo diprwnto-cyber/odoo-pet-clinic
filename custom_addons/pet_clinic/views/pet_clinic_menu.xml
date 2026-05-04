@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ============================================================ -->
+    <!-- ROOT MENU -->
+    <!-- ============================================================ -->
+    <menuitem id="menu_pet_clinic_root"
+              name="Pet Clinic"
+              web_icon="pet_clinic,static/description/icon.png"
+              sequence="1"/>
+
+    <!-- ============================================================ -->
+    <!-- 1. DASHBOARD -->
+    <!-- ============================================================ -->
+    <menuitem id="menu_pet_clinic_dashboard"
+              name="Dashboard"
+              parent="menu_pet_clinic_root"
+              action="action_pet_clinic_dashboard"
+              sequence="10"/>
+
+    <!-- ============================================================ -->
+    <!-- 2. PATIENT -->
+    <!-- ============================================================ -->
+    <menuitem id="menu_pet_clinic_patient"
+              name="Patient"
+              parent="menu_pet_clinic_root"
+              sequence="20"/>
+
+    <menuitem id="menu_pet_clinic_pet"
+              name="Patients (Pets)"
+              parent="menu_pet_clinic_patient"
+              action="action_pet_clinic_pet"
+              sequence="10"/>
+
+    <menuitem id="menu_pet_clinic_client"
+              name="Clients (Owners)"
+              parent="menu_pet_clinic_patient"
+              action="action_pet_clinic_client"
+              sequence="20"/>
+
+    <!-- ============================================================ -->
+    <!-- 3. APPOINTMENT -->
+    <!-- ============================================================ -->
+    <menuitem id="menu_pet_clinic_appointment"
+              name="Appointment"
+              parent="menu_pet_clinic_root"
+              action="action_pet_clinic_appointment"
+              sequence="30"/>
+
+    <!-- ============================================================ -->
+    <!-- 4. VISITATION -->
+    <!-- ============================================================ -->
+    <menuitem id="menu_pet_clinic_visitation"
+              name="Visitation"
+              parent="menu_pet_clinic_root"
+              action="action_pet_clinic_visitation"
+              sequence="40"/>
+
+    <!-- ============================================================ -->
+    <!-- 5. REPORT -->
+    <!-- ============================================================ -->
+    <menuitem id="menu_pet_clinic_report"
+              name="Report"
+              parent="menu_pet_clinic_root"
+              sequence="50"/>
+
+    <menuitem id="menu_report_visitation"
+              name="Laporan Kunjungan"
+              parent="menu_pet_clinic_report"
+              action="action_pet_clinic_visitation"
+              sequence="10"/>
+
+    <menuitem id="menu_report_service"
+              name="Laporan Layanan"
+              parent="menu_pet_clinic_report"
+              action="action_pet_clinic_service"
+              sequence="20"/>
+
+    <!-- ============================================================ -->
+    <!-- 6. MASTER DATA -->
+    <!-- ============================================================ -->
+    <menuitem id="menu_pet_clinic_master_data"
+              name="Master Data"
+              parent="menu_pet_clinic_root"
+              sequence="60"/>
+
+    <!-- Master Data > Wilayah -->
+    <menuitem id="menu_master_wilayah"
+              name="Wilayah"
+              parent="menu_pet_clinic_master_data"
+              sequence="10"/>
+
+    <menuitem id="menu_master_provinsi"
+              name="Provinsi"
+              parent="menu_master_wilayah"
+              action="action_provinsi"
+              sequence="10"/>
+
+    <menuitem id="menu_master_kab_kota"
+              name="Kab/Kota"
+              parent="menu_master_wilayah"
+              action="action_kab_kota"
+              sequence="20"/>
+
+    <menuitem id="menu_master_kecamatan"
+              name="Kecamatan"
+              parent="menu_master_wilayah"
+              action="action_kecamatan"
+              sequence="30"/>
+
+    <!-- Master Data > Fasilitas -->
+    <menuitem id="menu_master_fasilitas"
+              name="Fasilitas"
+              parent="menu_pet_clinic_master_data"
+              sequence="20"/>
+
+    <menuitem id="menu_master_room"
+              name="Room"
+              parent="menu_master_fasilitas"
+              action="action_room"
+              sequence="10"/>
+
+    <menuitem id="menu_master_lokasi"
+              name="Lokasi"
+              parent="menu_master_fasilitas"
+              action="action_lokasi"
+              sequence="20"/>
+
+    <!-- Master Data > Pet -->
+    <menuitem id="menu_master_pet"
+              name="Pet"
+              parent="menu_pet_clinic_master_data"
+              sequence="30"/>
+
+    <menuitem id="menu_master_pet_type"
+              name="Pet Type"
+              parent="menu_master_pet"
+              action="action_pet_type"
+              sequence="10"/>
+
+    <menuitem id="menu_master_pet_breed"
+              name="Pet Breed"
+              parent="menu_master_pet"
+              action="action_pet_breed"
+              sequence="20"/>
+
+    <!-- Master Data > Staff -->
+    <menuitem id="menu_master_staff"
+              name="Staff"
+              parent="menu_pet_clinic_master_data"
+              sequence="40"/>
+
+    <menuitem id="menu_master_doctor"
+              name="Doctor"
+              parent="menu_master_staff"
+              action="action_doctor"
+              sequence="10"/>
+
+    <menuitem id="menu_master_paramedis"
+              name="Paramedis"
+              parent="menu_master_staff"
+              action="action_paramedis"
+              sequence="20"/>
+
+    <menuitem id="menu_master_groomer"
+              name="Groomer"
+              parent="menu_master_staff"
+              action="action_groomer"
+              sequence="30"/>
+
+    <!-- Master Data > Products -->
+    <menuitem id="menu_master_products"
+              name="Products"
+              parent="menu_pet_clinic_master_data"
+              action="action_products"
+              sequence="50"/>
+
+    <!-- Master Data > Medical -->
+    <menuitem id="menu_master_medical"
+              name="Medical"
+              parent="menu_pet_clinic_master_data"
+              sequence="60"/>
+
+    <menuitem id="menu_master_diagnosa"
+              name="Diagnosa"
+              parent="menu_master_medical"
+              action="action_diagnosa"
+              sequence="10"/>
+
+    <menuitem id="menu_master_dosis"
+              name="Dosis"
+              parent="menu_master_medical"
+              action="action_dosis"
+              sequence="20"/>
+
+    <!-- Master Data > Content -->
+    <menuitem id="menu_master_content"
+              name="Content"
+              parent="menu_pet_clinic_master_data"
+              sequence="70"/>
+
+    <menuitem id="menu_master_banner"
+              name="Banner"
+              parent="menu_master_content"
+              action="action_banner"
+              sequence="10"/>
+
+    <menuitem id="menu_master_blog"
+              name="Blog"
+              parent="menu_master_content"
+              action="action_blog"
+              sequence="20"/>
+
+    <menuitem id="menu_master_event"
+              name="Event"
+              parent="menu_master_content"
+              action="action_event"
+              sequence="30"/>
+
+    <!-- Master Data > Notification Config -->
+    <menuitem id="menu_master_notif_config"
+              name="Notification Config"
+              parent="menu_pet_clinic_master_data"
+              sequence="80"/>
+
+    <menuitem id="menu_master_notif"
+              name="Notif"
+              parent="menu_master_notif_config"
+              action="action_notif"
+              sequence="10"/>
+
+    <menuitem id="menu_master_promo"
+              name="Promo"
+              parent="menu_master_notif_config"
+              action="action_promo"
+              sequence="20"/>
+
+    <menuitem id="menu_master_notif_reminder"
+              name="Notif Reminder"
+              parent="menu_master_notif_config"
+              action="action_notif_reminder"
+              sequence="30"/>
+
+    <menuitem id="menu_master_client_activate"
+              name="Client Activate"
+              parent="menu_master_notif_config"
+              action="action_client_activate"
+              sequence="40"/>
+
+    <menuitem id="menu_master_client_reset_password"
+              name="Client Reset Password"
+              parent="menu_master_notif_config"
+              action="action_client_reset_password"
+              sequence="50"/>
+
+    <menuitem id="menu_master_notif_reminder_checkup"
+              name="Notif Reminder Checkup"
+              parent="menu_master_notif_config"
+              action="action_notif_reminder_checkup"
+              sequence="60"/>
+
+    <menuitem id="menu_master_notif_after_service"
+              name="Notif After Service"
+              parent="menu_master_notif_config"
+              action="action_notif_after_service"
+              sequence="70"/>
+
+    <!-- ============================================================ -->
+    <!-- 7. REMINDER -->
+    <!-- ============================================================ -->
+    <menuitem id="menu_pet_clinic_reminder"
+              name="Reminder"
+              parent="menu_pet_clinic_root"
+              sequence="70"/>
+
+    <menuitem id="menu_reminder_checkup"
+              name="Reminder Checkup"
+              parent="menu_pet_clinic_reminder"
+              action="action_notif_reminder_checkup"
+              sequence="10"/>
+
+    <menuitem id="menu_reminder_member"
+              name="Reminder Member"
+              parent="menu_pet_clinic_reminder"
+              action="action_notif_reminder"
+              sequence="20"/>
+
+    <menuitem id="menu_reminder_visitation"
+              name="Reminder Kunjungan"
+              parent="menu_pet_clinic_reminder"
+              action="action_pet_clinic_visitation"
+              sequence="30"/>
+
+</odoo>

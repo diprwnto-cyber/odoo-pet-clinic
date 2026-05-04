@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Dashboard Action (Client Action for OWL Component) -->
+    <record id="action_pet_clinic_dashboard" model="ir.actions.client">
+        <field name="name">Dashboard</field>
+        <field name="tag">pet_clinic_dashboard</field>
+    </record>
+
+</odoo>

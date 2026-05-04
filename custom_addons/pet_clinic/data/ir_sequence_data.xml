@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- Client Sequence: PC0001, PC0002... -->
+        <record id="seq_pet_clinic_client" model="ir.sequence">
+            <field name="name">Pet Clinic Client</field>
+            <field name="code">pet_clinic.client</field>
+            <field name="prefix">PC</field>
+            <field name="padding">4</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+
+        <!-- Pet Sequence: PP0001, PP0002... -->
+        <record id="seq_pet_clinic_pet" model="ir.sequence">
+            <field name="name">Pet Clinic Pet</field>
+            <field name="code">pet_clinic.pet</field>
+            <field name="prefix">PP</field>
+            <field name="padding">4</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+
+        <!-- Visitation Sequence: PV-YYYYMMDD-XXX -->
+        <record id="seq_pet_clinic_visitation" model="ir.sequence">
+            <field name="name">Pet Clinic Visitation</field>
+            <field name="code">pet_clinic.visitation</field>
+            <field name="prefix">PV-%(year)s%(month)s%(day)s-</field>
+            <field name="padding">3</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+
+        <!-- Service Sequence: PS-YYYYMMDD-XXX -->
+        <record id="seq_pet_clinic_service" model="ir.sequence">
+            <field name="name">Pet Clinic Service</field>
+            <field name="code">pet_clinic.service</field>
+            <field name="prefix">PS-%(year)s%(month)s%(day)s-</field>
+            <field name="padding">3</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+
+        <!-- Appointment Sequence: PA-YYYYMM-XXXX -->
+        <record id="seq_pet_clinic_appointment" model="ir.sequence">
+            <field name="name">Pet Clinic Appointment</field>
+            <field name="code">pet_clinic.appointment</field>
+            <field name="prefix">PA-%(year)s%(month)s-</field>
+            <field name="padding">4</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+
+    </data>
+</odoo>

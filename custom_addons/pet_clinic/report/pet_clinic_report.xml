@@ -1,0 +1,413 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ============================================================ -->
+    <!-- Visitation Medical Record Report -->
+    <!-- ============================================================ -->
+    <record id="action_report_visitation_medical_record" model="ir.actions.report">
+        <field name="name">Medical Record</field>
+        <field name="model">pet_clinic.visitation</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">pet_clinic.report_visitation_medical_record</field>
+        <field name="report_file">pet_clinic.report_visitation_medical_record</field>
+        <field name="binding_model_id" ref="model_pet_clinic_visitation"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_visitation_medical_record">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h2 class="text-center">Rekam Medis / Medical Record</h2>
+                        <hr/>
+
+                        <div class="row mb-3">
+                            <div class="col-6">
+                                <table class="table table-sm table-borderless">
+                                    <tr>
+                                        <td style="width:40%"><strong>No. Visitation</strong></td>
+                                        <td>: <t t-esc="doc.name"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>No. Rekam Medis</strong></td>
+                                        <td>: <t t-esc="doc.nomor_rekam_medis or '-'"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Pemilik</strong></td>
+                                        <td>: <t t-esc="doc.owner_id.name or '-'"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Hewan</strong></td>
+                                        <td>: <t t-esc="doc.pet_id.name or '-'"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Umur</strong></td>
+                                        <td>: <t t-esc="doc.umur or '-'"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Penanganan</strong></td>
+                                        <td>: <t t-esc="doc.penanganan or '-'"/></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col-6">
+                                <table class="table table-sm table-borderless">
+                                    <tr>
+                                        <td style="width:40%"><strong>Dokter</strong></td>
+                                        <td>: <t t-esc="doc.doctor_id.name or '-'"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Paramedis</strong></td>
+                                        <td>: <t t-esc="doc.paramedis_id.name or '-'"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Tanggal Masuk</strong></td>
+                                        <td>: <t t-esc="doc.date_start"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Tanggal Keluar</strong></td>
+                                        <td>: <t t-esc="doc.date_end or '-'"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Lokasi</strong></td>
+                                        <td>: <t t-esc="doc.lokasi_pemeriksaan.name if doc.lokasi_pemeriksaan else '-'"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Status</strong></td>
+                                        <td>: <t t-esc="doc.state"/></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Anamnesa Section -->
+                        <h4>Anamnesa</h4>
+                        <div class="row">
+                            <div class="col-6">
+                                <table class="table table-sm table-borderless">
+                                    <tr>
+                                        <td style="width:45%"><strong>Anamnesa</strong></td>
+                                        <td>: <t t-esc="doc.anamnesa or '-'"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Populasi Hewan</strong></td>
+                                        <td>: <t t-esc="doc.populasi_hewan or '-'"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Lama Pemeliharaan</strong></td>
+                                        <td>: <t t-esc="doc.lama_pemeliharaan or '-'"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Makan</strong></td>
+                                        <td>: <t t-esc="doc.makan or '-'"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Minum</strong></td>
+                                        <td>: <t t-esc="doc.minum or '-'"/></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col-6">
+                                <table class="table table-sm table-borderless">
+                                    <tr>
+                                        <td style="width:45%"><strong>Keluhan/Tujuan</strong></td>
+                                        <td>: <t t-esc="doc.keluhan_tujuan or '-'"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Sistem Pemeliharaan</strong></td>
+                                        <td>: <t t-esc="doc.sistem_pemeliharaan or '-'"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Asal Hewan</strong></td>
+                                        <td>: <t t-esc="doc.asal_hewan or '-'"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Jenis Makanan</strong></td>
+                                        <td>: <t t-esc="doc.jenis_makanan or '-'"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Sumber Air Minum</strong></td>
+                                        <td>: <t t-esc="doc.sumber_air_minum or '-'"/></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Pet Condition Section -->
+                        <h4>Kondisi Hewan</h4>
+                        <div class="row">
+                            <div class="col-6">
+                                <table class="table table-sm table-borderless">
+                                    <tr>
+                                        <td style="width:45%"><strong>Weight (Kg)</strong></td>
+                                        <td>: <t t-esc="doc.weight"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>BCS (1-9)</strong></td>
+                                        <td>: <t t-esc="doc.bcs"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Respiratory Rate</strong></td>
+                                        <td>: <t t-esc="doc.respiratory_rate or '-'"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Warna Mukosa</strong></td>
+                                        <td>: <t t-esc="doc.warna_mukosa or '-'"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Diagnosis</strong></td>
+                                        <td>: <t t-esc="doc.diagnosis or '-'"/></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col-6">
+                                <table class="table table-sm table-borderless">
+                                    <tr>
+                                        <td style="width:45%"><strong>Temperature (°C)</strong></td>
+                                        <td>: <t t-esc="doc.temperature"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Pulse Rate</strong></td>
+                                        <td>: <t t-esc="doc.pulse_rate or '-'"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Fecal Scoring</strong></td>
+                                        <td>: <t t-esc="doc.fecal_scoring or '-'"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Dehidrasi</strong></td>
+                                        <td>: <t t-esc="doc.dehidrasi or '-'"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Therapy</strong></td>
+                                        <td>: <t t-esc="doc.therapy or '-'"/></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Services Table -->
+                        <t t-if="doc.service_ids">
+                            <h4>Layanan / Services</h4>
+                            <table class="table table-sm table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Service</th>
+                                        <th>Doctor</th>
+                                        <th>Amount</th>
+                                        <th>Unit Price</th>
+                                        <th class="text-end">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-set="svc_no" t-value="0"/>
+                                    <t t-foreach="doc.service_ids" t-as="svc">
+                                        <t t-set="svc_no" t-value="svc_no + 1"/>
+                                        <tr>
+                                            <td><t t-esc="svc_no"/></td>
+                                            <td><t t-esc="svc.service_type.name or '-'"/></td>
+                                            <td><t t-esc="svc.dokter_penerima.name or '-'"/></td>
+                                            <td><t t-esc="svc.amount"/></td>
+                                            <td><t t-esc="svc.unit_price"/></td>
+                                            <td class="text-end"><t t-esc="'%.2f' % svc.total_price"/></td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="5" class="text-end"><strong>Subtotal</strong></td>
+                                        <td class="text-end"><strong><t t-esc="'%.2f' % doc.service_subtotal"/></strong></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </t>
+
+                        <!-- Items Table -->
+                        <t t-if="doc.item_ids">
+                            <h4>Items</h4>
+                            <table class="table table-sm table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Item</th>
+                                        <th>Qty</th>
+                                        <th>UoM</th>
+                                        <th>Price</th>
+                                        <th class="text-end">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-set="item_no" t-value="0"/>
+                                    <t t-foreach="doc.item_ids" t-as="item">
+                                        <t t-set="item_no" t-value="item_no + 1"/>
+                                        <tr>
+                                            <td><t t-esc="item_no"/></td>
+                                            <td><t t-esc="item.product_id.name or '-'"/></td>
+                                            <td><t t-esc="item.quantity"/></td>
+                                            <td><t t-esc="item.uom_id.name or '-'"/></td>
+                                            <td><t t-esc="item.price"/></td>
+                                            <td class="text-end"><t t-esc="'%.2f' % item.total_price"/></td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="5" class="text-end"><strong>Subtotal</strong></td>
+                                        <td class="text-end"><strong><t t-esc="'%.2f' % doc.item_subtotal"/></strong></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </t>
+
+                        <!-- Grand Total -->
+                        <div class="row mt-4">
+                            <div class="col-8"/>
+                            <div class="col-4">
+                                <table class="table table-sm">
+                                    <tr>
+                                        <td><strong>Services Subtotal</strong></td>
+                                        <td class="text-end"><t t-esc="'%.2f' % doc.service_subtotal"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Items Subtotal</strong></td>
+                                        <td class="text-end"><t t-esc="'%.2f' % doc.item_subtotal"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Barang/Obat Pulang</strong></td>
+                                        <td class="text-end"><t t-esc="'%.2f' % doc.barang_subtotal"/></td>
+                                    </tr>
+                                    <tr class="border-top">
+                                        <td><strong>TOTAL</strong></td>
+                                        <td class="text-end"><strong><t t-esc="'%.2f' % doc.total_amount"/></strong></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Note -->
+                        <t t-if="doc.note">
+                            <h4>Catatan</h4>
+                            <p><t t-esc="doc.note"/></p>
+                        </t>
+
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <!-- ============================================================ -->
+    <!-- Laporan Kunjungan Report -->
+    <!-- ============================================================ -->
+    <record id="action_report_laporan_kunjungan" model="ir.actions.report">
+        <field name="name">Laporan Kunjungan</field>
+        <field name="model">pet_clinic.visitation</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">pet_clinic.report_laporan_kunjungan</field>
+        <field name="report_file">pet_clinic.report_laporan_kunjungan</field>
+        <field name="binding_model_id" ref="model_pet_clinic_visitation"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_laporan_kunjungan">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <h2 class="text-center">Laporan Kunjungan</h2>
+                    <hr/>
+                    <table class="table table-sm table-bordered">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>ID Visitation</th>
+                                <th>Pemilik</th>
+                                <th>Hewan</th>
+                                <th>Dokter</th>
+                                <th>Lokasi</th>
+                                <th>Tanggal</th>
+                                <th>Penanganan</th>
+                                <th>Status</th>
+                                <th class="text-end">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-set="row_no" t-value="0"/>
+                            <t t-foreach="docs" t-as="doc">
+                                <t t-set="row_no" t-value="row_no + 1"/>
+                                <tr>
+                                    <td><t t-esc="row_no"/></td>
+                                    <td><t t-esc="doc.name"/></td>
+                                    <td><t t-esc="doc.owner_id.name or '-'"/></td>
+                                    <td><t t-esc="doc.pet_id.name or '-'"/></td>
+                                    <td><t t-esc="doc.doctor_id.name or '-'"/></td>
+                                    <td><t t-esc="doc.lokasi_pemeriksaan.name if doc.lokasi_pemeriksaan else '-'"/></td>
+                                    <td><t t-esc="doc.date_start"/></td>
+                                    <td><t t-esc="doc.penanganan or '-'"/></td>
+                                    <td><t t-esc="doc.state"/></td>
+                                    <td class="text-end"><t t-esc="'%.2f' % doc.total_amount"/></td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+
+    <!-- ============================================================ -->
+    <!-- Laporan Layanan Report -->
+    <!-- ============================================================ -->
+    <record id="action_report_laporan_layanan" model="ir.actions.report">
+        <field name="name">Laporan Layanan</field>
+        <field name="model">pet_clinic.service</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">pet_clinic.report_laporan_layanan</field>
+        <field name="report_file">pet_clinic.report_laporan_layanan</field>
+        <field name="binding_model_id" ref="model_pet_clinic_service"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_laporan_layanan">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <h2 class="text-center">Laporan Layanan</h2>
+                    <hr/>
+                    <table class="table table-sm table-bordered">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>ID Service</th>
+                                <th>Visitation</th>
+                                <th>Hewan</th>
+                                <th>Service</th>
+                                <th>Dokter</th>
+                                <th>Tanggal</th>
+                                <th class="text-end">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-set="row_no" t-value="0"/>
+                            <t t-foreach="docs" t-as="doc">
+                                <t t-set="row_no" t-value="row_no + 1"/>
+                                <tr>
+                                    <td><t t-esc="row_no"/></td>
+                                    <td><t t-esc="doc.name"/></td>
+                                    <td><t t-esc="doc.visitation_id.name or '-'"/></td>
+                                    <td><t t-esc="doc.pet_id.name or '-'"/></td>
+                                    <td><t t-esc="doc.service_type.name or '-'"/></td>
+                                    <td><t t-esc="doc.dokter_penerima.name or '-'"/></td>
+                                    <td><t t-esc="doc.date_handling"/></td>
+                                    <td class="text-end"><t t-esc="'%.2f' % doc.total_price"/></td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+
+</odoo>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Service List View -->
+    <record id="view_pet_clinic_service_list" model="ir.ui.view">
+        <field name="name">pet_clinic.service.list</field>
+        <field name="model">pet_clinic.service</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="visitation_id"/>
+                <field name="pet_id"/>
+                <field name="nama_pemilik" string="Owner"/>
+                <field name="service_type" string="Service"/>
+                <field name="dokter_penerima" string="Doctor"/>
+                <field name="date_handling"/>
+                <field name="amount"/>
+                <field name="unit_price"/>
+                <field name="total_price" sum="Total"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Service Form View -->
+    <record id="view_pet_clinic_service_form" model="ir.ui.view">
+        <field name="name">pet_clinic.service.form</field>
+        <field name="model">pet_clinic.service</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_create_pos_order" string="Create POS Order"
+                            type="object" class="btn-primary"
+                            icon="fa-shopping-cart"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="visitation_id"/>
+                            <field name="pet_id"/>
+                            <field name="nama_pemilik" string="Owner"/>
+                            <field name="service_type" string="Service"/>
+                            <field name="category"/>
+                        </group>
+                        <group>
+                            <field name="dokter_penerima" string="Dokter Penerima"/>
+                            <field name="dokter_dp_ip" string="Dokter DP/IP"/>
+                            <field name="date_handling"/>
+                            <field name="amount"/>
+                            <field name="unit_price"/>
+                            <field name="total_price"/>
+                            <field name="referensi_pos_order"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Service Details" name="service_details">
+                            <field name="service_detail_ids">
+                                <list editable="bottom">
+                                    <field name="name"/>
+                                    <field name="is_done" widget="boolean_toggle"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <!-- Service Search View -->
+    <record id="view_pet_clinic_service_search" model="ir.ui.view">
+        <field name="name">pet_clinic.service.search</field>
+        <field name="model">pet_clinic.service</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="visitation_id"/>
+                <field name="pet_id"/>
+                <field name="service_type"/>
+                <field name="dokter_penerima"/>
+                <group expand="0" string="Group By">
+                    <filter name="group_service" string="Service Type" context="{'group_by':'service_type'}"/>
+                    <filter name="group_doctor" string="Doctor" context="{'group_by':'dokter_penerima'}"/>
+                    <filter name="group_category" string="Category" context="{'group_by':'category'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Service Action -->
+    <record id="action_pet_clinic_service" model="ir.actions.act_window">
+        <field name="name">Services</field>
+        <field name="res_model">pet_clinic.service</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No services yet.
+            </p>
+        </field>
+    </record>
+
+</odoo>

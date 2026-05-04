@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Module Category -->
+    <record id="module_category_pet_clinic" model="ir.module.category">
+        <field name="name">Pet Clinic</field>
+        <field name="description">Pet Clinic Management</field>
+        <field name="sequence">100</field>
+    </record>
+
+    <!-- User Group -->
+    <record id="group_user" model="res.groups">
+        <field name="name">Receptionist</field>
+        <field name="category_id" ref="module_category_pet_clinic"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <!-- Doctor Group -->
+    <record id="group_doctor" model="res.groups">
+        <field name="name">Doctor</field>
+        <field name="category_id" ref="module_category_pet_clinic"/>
+        <field name="implied_ids" eval="[(4, ref('pet_clinic.group_user'))]"/>
+    </record>
+
+    <!-- Manager Group (includes admin/settings users) -->
+    <record id="group_manager" model="res.groups">
+        <field name="name">Manager</field>
+        <field name="category_id" ref="module_category_pet_clinic"/>
+        <field name="implied_ids" eval="[(4, ref('pet_clinic.group_doctor'))]"/>
+        <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
+    </record>
+
+</odoo>
+

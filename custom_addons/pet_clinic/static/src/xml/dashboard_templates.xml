@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="pet_clinic.Dashboard">
+        <div class="o_pet_clinic_dashboard">
+
+            <!-- Filter Bar -->
+            <div class="pc-dashboard-filter">
+                <div class="pc-filter-row">
+                    <div class="pc-filter-item">
+                        <label>Lokasi:</label>
+                        <select t-on-change="onLokasiChange" class="pc-select">
+                            <option value="">Semua Lokasi</option>
+                            <t t-foreach="state.locations" t-as="loc" t-key="loc.id">
+                                <option t-att-value="loc.id"><t t-esc="loc.name"/></option>
+                            </t>
+                        </select>
+                    </div>
+                    <div class="pc-filter-item">
+                        <label>Dari:</label>
+                        <input type="date" t-att-value="state.date_from" t-on-change="onDateFromChange" class="pc-input"/>
+                    </div>
+                    <div class="pc-filter-item">
+                        <label>Sampai:</label>
+                        <input type="date" t-att-value="state.date_to" t-on-change="onDateToChange" class="pc-input"/>
+                    </div>
+                    <div class="pc-filter-item">
+                        <button class="btn btn-primary pc-btn-process" t-on-click="onProcessClick">
+                            <i class="fa fa-refresh me-1"/> Proses
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- KPI Cards -->
+            <div class="pc-kpi-container">
+                <div class="pc-kpi-card pc-kpi-blue" t-on-click="openVisitations">
+                    <div class="pc-kpi-icon">
+                        <i class="fa fa-stethoscope"/>
+                    </div>
+                    <div class="pc-kpi-info">
+                        <span class="pc-kpi-value"><t t-esc="state.visitationCount"/></span>
+                        <span class="pc-kpi-label">Kunjungan</span>
+                    </div>
+                    <div class="pc-kpi-more">
+                        <span>More Info <i class="fa fa-arrow-right"/></span>
+                    </div>
+                </div>
+
+                <div class="pc-kpi-card pc-kpi-green" t-on-click="openMembers">
+                    <div class="pc-kpi-icon">
+                        <i class="fa fa-users"/>
+                    </div>
+                    <div class="pc-kpi-info">
+                        <span class="pc-kpi-value"><t t-esc="state.memberCount"/></span>
+                        <span class="pc-kpi-label">Member</span>
+                    </div>
+                    <div class="pc-kpi-more">
+                        <span>More Info <i class="fa fa-arrow-right"/></span>
+                    </div>
+                </div>
+
+                <div class="pc-kpi-card pc-kpi-orange" t-on-click="openPets">
+                    <div class="pc-kpi-icon">
+                        <i class="fa fa-paw"/>
+                    </div>
+                    <div class="pc-kpi-info">
+                        <span class="pc-kpi-value"><t t-esc="state.petCount"/></span>
+                        <span class="pc-kpi-label">Hewan</span>
+                    </div>
+                    <div class="pc-kpi-more">
+                        <span>More Info <i class="fa fa-arrow-right"/></span>
+                    </div>
+                </div>
+
+                <div class="pc-kpi-card pc-kpi-teal" t-on-click="openDoctors">
+                    <div class="pc-kpi-icon">
+                        <i class="fa fa-user-md"/>
+                    </div>
+                    <div class="pc-kpi-info">
+                        <span class="pc-kpi-value"><t t-esc="state.doctorCount"/></span>
+                        <span class="pc-kpi-label">Dokter</span>
+                    </div>
+                    <div class="pc-kpi-more">
+                        <span>More Info <i class="fa fa-arrow-right"/></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content Sections -->
+            <div class="pc-sections-container">
+                <div class="pc-section-row">
+                    <!-- Section Layanan -->
+                    <div class="pc-section-card">
+                        <div class="pc-section-header">
+                            <h5><i class="fa fa-cogs me-2"/>Layanan</h5>
+                            <div class="pc-section-filters">
+                                <button t-att-class="'btn btn-sm ' + (state.serviceFilter === 'today' ? 'btn-primary' : 'btn-outline-secondary')"
+                                        t-on-click="() => this.onServiceFilterChange('today')">Today</button>
+                                <button t-att-class="'btn btn-sm ' + (state.serviceFilter === 'month' ? 'btn-primary' : 'btn-outline-secondary')"
+                                        t-on-click="() => this.onServiceFilterChange('month')">Month</button>
+                                <button t-att-class="'btn btn-sm ' + (state.serviceFilter === 'year' ? 'btn-primary' : 'btn-outline-secondary')"
+                                        t-on-click="() => this.onServiceFilterChange('year')">Year</button>
+                            </div>
+                        </div>
+                        <table class="table table-sm table-hover">
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Daftar Layanan</th>
+                                    <th class="text-end">Total Layanan</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="state.serviceData" t-as="svc" t-key="svc.no">
+                                    <tr>
+                                        <td><t t-esc="svc.no"/></td>
+                                        <td><t t-esc="svc.name"/></td>
+                                        <td class="text-end"><t t-esc="svc.count"/></td>
+                                    </tr>
+                                </t>
+                                <tr t-if="!state.serviceData.length">
+                                    <td colspan="3" class="text-center text-muted">Tidak ada data</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Section Penanganan -->
+                    <div class="pc-section-card">
+                        <div class="pc-section-header">
+                            <h5><i class="fa fa-medkit me-2"/>Penanganan</h5>
+                            <div class="pc-section-filters">
+                                <button t-att-class="'btn btn-sm ' + (state.penangananFilter === 'today' ? 'btn-primary' : 'btn-outline-secondary')"
+                                        t-on-click="() => this.onPenangananFilterChange('today')">Today</button>
+                                <button t-att-class="'btn btn-sm ' + (state.penangananFilter === 'month' ? 'btn-primary' : 'btn-outline-secondary')"
+                                        t-on-click="() => this.onPenangananFilterChange('month')">Month</button>
+                                <button t-att-class="'btn btn-sm ' + (state.penangananFilter === 'year' ? 'btn-primary' : 'btn-outline-secondary')"
+                                        t-on-click="() => this.onPenangananFilterChange('year')">Year</button>
+                            </div>
+                        </div>
+                        <table class="table table-sm table-hover">
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Penanganan</th>
+                                    <th>Status</th>
+                                    <th class="text-end">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="state.penangananData" t-as="p" t-key="p.no">
+                                    <tr>
+                                        <td><t t-esc="p.no"/></td>
+                                        <td><t t-esc="p.penanganan"/></td>
+                                        <td><t t-esc="p.state"/></td>
+                                        <td class="text-end"><t t-esc="p.count"/></td>
+                                    </tr>
+                                </t>
+                                <tr t-if="!state.penangananData.length">
+                                    <td colspan="4" class="text-center text-muted">Tidak ada data</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="pc-section-row">
+                    <!-- Kunjungan Hari Ini -->
+                    <div class="pc-section-card">
+                        <div class="pc-section-header">
+                            <h5><i class="fa fa-calendar-check-o me-2"/>Kunjungan Hari Ini</h5>
+                        </div>
+                        <table class="table table-sm table-hover">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Pemilik</th>
+                                    <th>Hewan</th>
+                                    <th>Dokter</th>
+                                    <th>Lokasi</th>
+                                    <th>Tanggal</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="state.visitationsToday" t-as="v" t-key="v.id">
+                                    <tr>
+                                        <td><t t-esc="v.name"/></td>
+                                        <td><t t-esc="v.owner_id ? v.owner_id[1] : '-'"/></td>
+                                        <td><t t-esc="v.pet_id ? v.pet_id[1] : '-'"/></td>
+                                        <td><t t-esc="v.doctor_id ? v.doctor_id[1] : '-'"/></td>
+                                        <td><t t-esc="v.lokasi_pemeriksaan ? v.lokasi_pemeriksaan[1] : '-'"/></td>
+                                        <td><t t-esc="v.date_start"/></td>
+                                    </tr>
+                                </t>
+                                <tr t-if="!state.visitationsToday.length">
+                                    <td colspan="6" class="text-center text-muted">Tidak ada kunjungan hari ini</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Janji Hari Ini -->
+                    <div class="pc-section-card">
+                        <div class="pc-section-header">
+                            <h5><i class="fa fa-clock-o me-2"/>Janji Hari Ini</h5>
+                        </div>
+                        <table class="table table-sm table-hover">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Pemilik</th>
+                                    <th>Hewan</th>
+                                    <th>Dokter</th>
+                                    <th>Lokasi</th>
+                                    <th>Tanggal</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="state.appointmentsToday" t-as="a" t-key="a.id">
+                                    <tr>
+                                        <td><t t-esc="a.name"/></td>
+                                        <td><t t-esc="a.owner_id ? a.owner_id[1] : '-'"/></td>
+                                        <td><t t-esc="a.pet_id ? a.pet_id[1] : '-'"/></td>
+                                        <td><t t-esc="a.doctor_id ? a.doctor_id[1] : '-'"/></td>
+                                        <td><t t-esc="a.location_id ? a.location_id[1] : '-'"/></td>
+                                        <td><t t-esc="a.date"/></td>
+                                    </tr>
+                                </t>
+                                <tr t-if="!state.appointmentsToday.length">
+                                    <td colspan="6" class="text-center text-muted">Tidak ada janji hari ini</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Notif Hari Ini -->
+                <div class="pc-section-row">
+                    <div class="pc-section-card pc-section-full">
+                        <div class="pc-section-header">
+                            <h5><i class="fa fa-bell me-2"/>Notif Hari Ini</h5>
+                        </div>
+                        <table class="table table-sm table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Nama</th>
+                                    <th class="text-end">Jumlah</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="state.notifData" t-as="n" t-key="n.name">
+                                    <tr>
+                                        <td><t t-esc="n.name"/></td>
+                                        <td class="text-end"><t t-esc="n.count"/></td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </t>
+
+</templates>

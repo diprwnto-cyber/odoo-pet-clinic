@@ -1,0 +1,692 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ============================================================ -->
+    <!-- PET TYPE -->
+    <!-- ============================================================ -->
+    <record id="view_pet_type_list" model="ir.ui.view">
+        <field name="name">pet_clinic.pet_type.list</field>
+        <field name="model">pet_clinic.pet_type</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="name"/>
+            </list>
+        </field>
+    </record>
+    <record id="view_pet_type_form" model="ir.ui.view">
+        <field name="name">pet_clinic.pet_type.form</field>
+        <field name="model">pet_clinic.pet_type</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                    <notebook>
+                        <page string="Breeds">
+                            <field name="breed_ids">
+                                <list editable="bottom">
+                                    <field name="name"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="action_pet_type" model="ir.actions.act_window">
+        <field name="name">Pet Types</field>
+        <field name="res_model">pet_clinic.pet_type</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- ============================================================ -->
+    <!-- PET BREED -->
+    <!-- ============================================================ -->
+    <record id="view_pet_breed_list" model="ir.ui.view">
+        <field name="name">pet_clinic.pet_breed.list</field>
+        <field name="model">pet_clinic.pet_breed</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="name"/>
+                <field name="type_id"/>
+            </list>
+        </field>
+    </record>
+    <record id="view_pet_breed_form" model="ir.ui.view">
+        <field name="name">pet_clinic.pet_breed.form</field>
+        <field name="model">pet_clinic.pet_breed</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="type_id"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="action_pet_breed" model="ir.actions.act_window">
+        <field name="name">Pet Breeds</field>
+        <field name="res_model">pet_clinic.pet_breed</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- ============================================================ -->
+    <!-- DOCTOR -->
+    <!-- ============================================================ -->
+    <record id="view_doctor_list" model="ir.ui.view">
+        <field name="name">pet_clinic.doctor.list</field>
+        <field name="model">pet_clinic.doctor</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="phone"/>
+                <field name="specialization"/>
+            </list>
+        </field>
+    </record>
+    <record id="view_doctor_form" model="ir.ui.view">
+        <field name="name">pet_clinic.doctor.form</field>
+        <field name="model">pet_clinic.doctor</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="phone"/>
+                        </group>
+                        <group>
+                            <field name="specialization"/>
+                        </group>
+                    </group>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+    <record id="action_doctor" model="ir.actions.act_window">
+        <field name="name">Doctors</field>
+        <field name="res_model">pet_clinic.doctor</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- ============================================================ -->
+    <!-- PARAMEDIS -->
+    <!-- ============================================================ -->
+    <record id="view_paramedis_list" model="ir.ui.view">
+        <field name="name">pet_clinic.paramedis.list</field>
+        <field name="model">pet_clinic.paramedis</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="name"/>
+                <field name="phone"/>
+            </list>
+        </field>
+    </record>
+    <record id="view_paramedis_form" model="ir.ui.view">
+        <field name="name">pet_clinic.paramedis.form</field>
+        <field name="model">pet_clinic.paramedis</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="phone"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="action_paramedis" model="ir.actions.act_window">
+        <field name="name">Paramedis</field>
+        <field name="res_model">pet_clinic.paramedis</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- ============================================================ -->
+    <!-- GROOMER -->
+    <!-- ============================================================ -->
+    <record id="view_groomer_list" model="ir.ui.view">
+        <field name="name">pet_clinic.groomer.list</field>
+        <field name="model">pet_clinic.groomer</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="name"/>
+                <field name="phone"/>
+            </list>
+        </field>
+    </record>
+    <record id="view_groomer_form" model="ir.ui.view">
+        <field name="name">pet_clinic.groomer.form</field>
+        <field name="model">pet_clinic.groomer</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="phone"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="action_groomer" model="ir.actions.act_window">
+        <field name="name">Groomers</field>
+        <field name="res_model">pet_clinic.groomer</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- ============================================================ -->
+    <!-- ROOM -->
+    <!-- ============================================================ -->
+    <record id="view_room_list" model="ir.ui.view">
+        <field name="name">pet_clinic.room.list</field>
+        <field name="model">pet_clinic.room</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="name"/>
+                <field name="no_ruangan"/>
+            </list>
+        </field>
+    </record>
+    <record id="view_room_form" model="ir.ui.view">
+        <field name="name">pet_clinic.room.form</field>
+        <field name="model">pet_clinic.room</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="no_ruangan"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="action_room" model="ir.actions.act_window">
+        <field name="name">Rooms</field>
+        <field name="res_model">pet_clinic.room</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- ============================================================ -->
+    <!-- LOKASI -->
+    <!-- ============================================================ -->
+    <record id="view_lokasi_list" model="ir.ui.view">
+        <field name="name">pet_clinic.lokasi.list</field>
+        <field name="model">pet_clinic.lokasi</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="name"/>
+                <field name="address"/>
+            </list>
+        </field>
+    </record>
+    <record id="view_lokasi_form" model="ir.ui.view">
+        <field name="name">pet_clinic.lokasi.form</field>
+        <field name="model">pet_clinic.lokasi</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="address"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="action_lokasi" model="ir.actions.act_window">
+        <field name="name">Lokasi</field>
+        <field name="res_model">pet_clinic.lokasi</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- ============================================================ -->
+    <!-- PROVINSI -->
+    <!-- ============================================================ -->
+    <record id="view_provinsi_list" model="ir.ui.view">
+        <field name="name">pet_clinic.provinsi.list</field>
+        <field name="model">pet_clinic.provinsi</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="name"/>
+            </list>
+        </field>
+    </record>
+    <record id="action_provinsi" model="ir.actions.act_window">
+        <field name="name">Provinsi</field>
+        <field name="res_model">pet_clinic.provinsi</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- ============================================================ -->
+    <!-- KAB/KOTA -->
+    <!-- ============================================================ -->
+    <record id="view_kab_kota_list" model="ir.ui.view">
+        <field name="name">pet_clinic.kab_kota.list</field>
+        <field name="model">pet_clinic.kab_kota</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="name"/>
+            </list>
+        </field>
+    </record>
+    <record id="action_kab_kota" model="ir.actions.act_window">
+        <field name="name">Kab/Kota</field>
+        <field name="res_model">pet_clinic.kab_kota</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- ============================================================ -->
+    <!-- KECAMATAN -->
+    <!-- ============================================================ -->
+    <record id="view_kecamatan_list" model="ir.ui.view">
+        <field name="name">pet_clinic.kecamatan.list</field>
+        <field name="model">pet_clinic.kecamatan</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="name"/>
+                <field name="kab_kota_id"/>
+            </list>
+        </field>
+    </record>
+    <record id="action_kecamatan" model="ir.actions.act_window">
+        <field name="name">Kecamatan</field>
+        <field name="res_model">pet_clinic.kecamatan</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- ============================================================ -->
+    <!-- BANNER -->
+    <!-- ============================================================ -->
+    <record id="view_banner_list" model="ir.ui.view">
+        <field name="name">pet_clinic.banner.list</field>
+        <field name="model">pet_clinic.banner</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="url"/>
+            </list>
+        </field>
+    </record>
+    <record id="view_banner_form" model="ir.ui.view">
+        <field name="name">pet_clinic.banner.form</field>
+        <field name="model">pet_clinic.banner</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="image" widget="image"/>
+                        <field name="url"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="action_banner" model="ir.actions.act_window">
+        <field name="name">Banners</field>
+        <field name="res_model">pet_clinic.banner</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- ============================================================ -->
+    <!-- BLOG -->
+    <!-- ============================================================ -->
+    <record id="view_blog_list" model="ir.ui.view">
+        <field name="name">pet_clinic.blog.list</field>
+        <field name="model">pet_clinic.blog</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+            </list>
+        </field>
+    </record>
+    <record id="view_blog_form" model="ir.ui.view">
+        <field name="name">pet_clinic.blog.form</field>
+        <field name="model">pet_clinic.blog</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                    <field name="content"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="action_blog" model="ir.actions.act_window">
+        <field name="name">Blog</field>
+        <field name="res_model">pet_clinic.blog</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- ============================================================ -->
+    <!-- EVENT -->
+    <!-- ============================================================ -->
+    <record id="view_event_list" model="ir.ui.view">
+        <field name="name">pet_clinic.event.list</field>
+        <field name="model">pet_clinic.event</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="date"/>
+            </list>
+        </field>
+    </record>
+    <record id="view_event_form" model="ir.ui.view">
+        <field name="name">pet_clinic.event.form</field>
+        <field name="model">pet_clinic.event</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="date"/>
+                    </group>
+                    <field name="description" placeholder="Event description..."/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="action_event" model="ir.actions.act_window">
+        <field name="name">Events</field>
+        <field name="res_model">pet_clinic.event</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- ============================================================ -->
+    <!-- NOTIF -->
+    <!-- ============================================================ -->
+    <record id="view_notif_list" model="ir.ui.view">
+        <field name="name">pet_clinic.notif.list</field>
+        <field name="model">pet_clinic.notif</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="type"/>
+            </list>
+        </field>
+    </record>
+    <record id="view_notif_form" model="ir.ui.view">
+        <field name="name">pet_clinic.notif.form</field>
+        <field name="model">pet_clinic.notif</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="type"/>
+                    </group>
+                    <field name="content" placeholder="Notification content..."/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="action_notif" model="ir.actions.act_window">
+        <field name="name">Notifications</field>
+        <field name="res_model">pet_clinic.notif</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- ============================================================ -->
+    <!-- PROMO -->
+    <!-- ============================================================ -->
+    <record id="view_promo_list" model="ir.ui.view">
+        <field name="name">pet_clinic.promo.list</field>
+        <field name="model">pet_clinic.promo</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="discount"/>
+                <field name="date_start"/>
+                <field name="date_end"/>
+            </list>
+        </field>
+    </record>
+    <record id="view_promo_form" model="ir.ui.view">
+        <field name="name">pet_clinic.promo.form</field>
+        <field name="model">pet_clinic.promo</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="discount"/>
+                        </group>
+                        <group>
+                            <field name="date_start"/>
+                            <field name="date_end"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="action_promo" model="ir.actions.act_window">
+        <field name="name">Promo</field>
+        <field name="res_model">pet_clinic.promo</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- ============================================================ -->
+    <!-- NOTIF REMINDER -->
+    <!-- ============================================================ -->
+    <record id="view_notif_reminder_list" model="ir.ui.view">
+        <field name="name">pet_clinic.notif_reminder.list</field>
+        <field name="model">pet_clinic.notif_reminder</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="name"/>
+                <field name="days_before"/>
+            </list>
+        </field>
+    </record>
+    <record id="view_notif_reminder_form" model="ir.ui.view">
+        <field name="name">pet_clinic.notif_reminder.form</field>
+        <field name="model">pet_clinic.notif_reminder</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="days_before"/>
+                    </group>
+                    <field name="template" placeholder="Template content..."/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="action_notif_reminder" model="ir.actions.act_window">
+        <field name="name">Notif Reminder</field>
+        <field name="res_model">pet_clinic.notif_reminder</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- ============================================================ -->
+    <!-- CLIENT ACTIVATE -->
+    <!-- ============================================================ -->
+    <record id="view_client_activate_list" model="ir.ui.view">
+        <field name="name">pet_clinic.client_activate.list</field>
+        <field name="model">pet_clinic.client_activate</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="name"/>
+            </list>
+        </field>
+    </record>
+    <record id="view_client_activate_form" model="ir.ui.view">
+        <field name="name">pet_clinic.client_activate.form</field>
+        <field name="model">pet_clinic.client_activate</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                    <field name="template" placeholder="Template content..."/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="action_client_activate" model="ir.actions.act_window">
+        <field name="name">Client Activate</field>
+        <field name="res_model">pet_clinic.client_activate</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- ============================================================ -->
+    <!-- CLIENT RESET PASSWORD -->
+    <!-- ============================================================ -->
+    <record id="view_client_reset_password_list" model="ir.ui.view">
+        <field name="name">pet_clinic.client_reset_password.list</field>
+        <field name="model">pet_clinic.client_reset_password</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="name"/>
+            </list>
+        </field>
+    </record>
+    <record id="view_client_reset_password_form" model="ir.ui.view">
+        <field name="name">pet_clinic.client_reset_password.form</field>
+        <field name="model">pet_clinic.client_reset_password</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                    <field name="template" placeholder="Template content..."/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="action_client_reset_password" model="ir.actions.act_window">
+        <field name="name">Client Reset Password</field>
+        <field name="res_model">pet_clinic.client_reset_password</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- ============================================================ -->
+    <!-- NOTIF REMINDER CHECKUP -->
+    <!-- ============================================================ -->
+    <record id="view_notif_reminder_checkup_list" model="ir.ui.view">
+        <field name="name">pet_clinic.notif_reminder_checkup.list</field>
+        <field name="model">pet_clinic.notif_reminder_checkup</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="name"/>
+                <field name="days_after"/>
+            </list>
+        </field>
+    </record>
+    <record id="action_notif_reminder_checkup" model="ir.actions.act_window">
+        <field name="name">Notif Reminder Checkup</field>
+        <field name="res_model">pet_clinic.notif_reminder_checkup</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- ============================================================ -->
+    <!-- NOTIF AFTER SERVICE -->
+    <!-- ============================================================ -->
+    <record id="view_notif_after_service_list" model="ir.ui.view">
+        <field name="name">pet_clinic.notif_after_service.list</field>
+        <field name="model">pet_clinic.notif_after_service</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="name"/>
+                <field name="days_after"/>
+            </list>
+        </field>
+    </record>
+    <record id="action_notif_after_service" model="ir.actions.act_window">
+        <field name="name">Notif After Service</field>
+        <field name="res_model">pet_clinic.notif_after_service</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- ============================================================ -->
+    <!-- DIAGNOSA -->
+    <!-- ============================================================ -->
+    <record id="view_diagnosa_list" model="ir.ui.view">
+        <field name="name">pet_clinic.diagnosa.list</field>
+        <field name="model">pet_clinic.diagnosa</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="name"/>
+                <field name="description"/>
+            </list>
+        </field>
+    </record>
+    <record id="view_diagnosa_form" model="ir.ui.view">
+        <field name="name">pet_clinic.diagnosa.form</field>
+        <field name="model">pet_clinic.diagnosa</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                    <field name="description" placeholder="Description..."/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="action_diagnosa" model="ir.actions.act_window">
+        <field name="name">Diagnosa</field>
+        <field name="res_model">pet_clinic.diagnosa</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- ============================================================ -->
+    <!-- DOSIS -->
+    <!-- ============================================================ -->
+    <record id="view_dosis_list" model="ir.ui.view">
+        <field name="name">pet_clinic.dosis.list</field>
+        <field name="model">pet_clinic.dosis</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="name"/>
+                <field name="description"/>
+                <field name="quantity"/>
+            </list>
+        </field>
+    </record>
+    <record id="view_dosis_form" model="ir.ui.view">
+        <field name="name">pet_clinic.dosis.form</field>
+        <field name="model">pet_clinic.dosis</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="quantity"/>
+                    </group>
+                    <field name="description" placeholder="Description..."/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="action_dosis" model="ir.actions.act_window">
+        <field name="name">Dosis</field>
+        <field name="res_model">pet_clinic.dosis</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- ============================================================ -->
+    <!-- PRODUCTS (link to product.template) -->
+    <!-- ============================================================ -->
+    <record id="action_products" model="ir.actions.act_window">
+        <field name="name">Products</field>
+        <field name="res_model">product.template</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+</odoo>

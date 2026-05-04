@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Visitation List View -->
+    <record id="view_pet_clinic_visitation_list" model="ir.ui.view">
+        <field name="name">pet_clinic.visitation.list</field>
+        <field name="model">pet_clinic.visitation</field>
+        <field name="arch" type="xml">
+            <list decoration-info="state=='draft'" decoration-warning="state=='in_process'" decoration-success="state=='done'" decoration-muted="state=='cancel'">
+                <field name="name"/>
+                <field name="owner_id"/>
+                <field name="pet_id"/>
+                <field name="doctor_id"/>
+                <field name="date_start"/>
+                <field name="penanganan"/>
+                <field name="lokasi_pemeriksaan"/>
+                <field name="total_amount" sum="Total"/>
+                <field name="state" widget="badge" decoration-info="state=='draft'" decoration-warning="state=='in_process'" decoration-success="state=='done'"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Visitation Form View -->
+    <record id="view_pet_clinic_visitation_form" model="ir.ui.view">
+        <field name="name">pet_clinic.visitation.form</field>
+        <field name="model">pet_clinic.visitation</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_check" string="Check"
+                            type="object" class="btn-primary"
+                            invisible="state != 'draft'"/>
+                    <button name="action_done" string="Done"
+                            type="object" class="btn-primary"
+                            invisible="state != 'in_process'"/>
+                    <button name="action_create_sale_order" string="Buat Penawaran"
+                            type="object" class="btn-secondary"
+                            invisible="state not in ('in_process', 'done')"/>
+                    <button name="action_cancel" string="Cancel"
+                            type="object"
+                            invisible="state in ('done', 'cancel')"/>
+                    <button name="action_draft" string="Set to Draft"
+                            type="object"
+                            invisible="state != 'cancel'"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,in_process,done"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_services"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-cogs">
+                            <field name="service_count" widget="statinfo" string="Services"/>
+                        </button>
+                        <button name="action_view_items"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-cubes">
+                            <field name="item_count" widget="statinfo" string="Items"/>
+                        </button>
+                        <button name="action_view_sale_order"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-shopping-cart"
+                                invisible="not id_so">
+                            <field name="sale_order_count" widget="statinfo" string="Sale Orders"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="nomor_rekam_medis"/>
+                            <field name="owner_id"/>
+                            <field name="pet_id" domain="[('owner_id', '=', owner_id)]"/>
+                            <field name="umur"/>
+                            <field name="penanganan"/>
+                            <field name="room_id"/>
+                            <field name="price_list_id"/>
+                            <field name="status_pasien"/>
+                        </group>
+                        <group>
+                            <field name="receptionist_id"/>
+                            <field name="date_start"/>
+                            <field name="date_end"/>
+                            <field name="lokasi_pemeriksaan"/>
+                            <field name="lokasi_pendaftaran"/>
+                            <field name="awal"/>
+                            <field name="id_so" readonly="1"/>
+                            <field name="reminder_checkup"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <!-- Tab 1: Medical Records -->
+                        <page string="Medical Records" name="medical_records">
+                            <group>
+                                <group>
+                                    <field name="doctor_id"/>
+                                </group>
+                                <group>
+                                    <field name="paramedis_id"/>
+                                </group>
+                            </group>
+
+                            <separator string="Medical Records Information"/>
+                            <group string="Anamnesa">
+                                <group>
+                                    <field name="anamnesa"/>
+                                    <field name="populasi_hewan"/>
+                                    <field name="lama_pemeliharaan"/>
+                                    <field name="makan"/>
+                                    <field name="minum"/>
+                                    <field name="tempat_air_minum"/>
+                                </group>
+                                <group>
+                                    <field name="keluhan_tujuan"/>
+                                    <field name="sistem_pemeliharaan"/>
+                                    <field name="asal_hewan"/>
+                                    <field name="jenis_makanan"/>
+                                    <field name="sumber_air_minum"/>
+                                </group>
+                            </group>
+
+                            <separator string="Pet Condition"/>
+                            <group>
+                                <group>
+                                    <field name="weight" string="Weight (Kg)"/>
+                                    <field name="bcs" string="BCS (1-9)"/>
+                                    <field name="respiratory_rate"/>
+                                    <field name="warna_mukosa"/>
+                                    <field name="feces" string="Feces (1-7)"/>
+                                    <field name="serumen_telinga"/>
+                                    <field name="nasal_discharge"/>
+                                    <field name="pemeriksaan_lainnya"/>
+                                    <field name="diagnosis"/>
+                                    <field name="action_field"/>
+                                </group>
+                                <group>
+                                    <field name="temperature" string="Temperature (°C)"/>
+                                    <field name="pulse_rate"/>
+                                    <field name="fecal_scoring" string="Fecal Scoring (1-7)"/>
+                                    <field name="dehidrasi"/>
+                                    <field name="urin"/>
+                                    <field name="ocular_discharge"/>
+                                    <field name="saliva"/>
+                                    <separator/>
+                                    <field name="diagnosa_sementara"/>
+                                    <field name="therapy"/>
+                                </group>
+                            </group>
+                        </page>
+
+                        <!-- Tab 2: Services -->
+                        <page string="Services" name="services">
+                            <field name="service_ids">
+                                <list editable="bottom">
+                                    <field name="service_type" string="Service"/>
+                                    <field name="dokter_penerima" string="Doctor"/>
+                                    <field name="amount"/>
+                                    <field name="unit_price"/>
+                                    <field name="total_price" sum="Total"/>
+                                </list>
+                            </field>
+                            <group class="oe_subtotal_footer oe_right">
+                                <field name="service_subtotal" string="Services Subtotal"/>
+                                <field name="item_subtotal" string="Items Subtotal"/>
+                                <field name="barang_subtotal" string="Barang/Obat Pulang Subtotal"/>
+                                <div class="oe_subtotal_footer_separator">
+                                    <field name="total_amount" class="oe_subtotal_footer_separator"/>
+                                </div>
+                            </group>
+                        </page>
+
+                        <!-- Tab 3: Items -->
+                        <page string="Items" name="items">
+                            <field name="item_ids">
+                                <list editable="bottom">
+                                    <field name="product_id" string="Item"/>
+                                    <field name="simple_name"/>
+                                    <field name="category_id" string="Category"/>
+                                    <field name="quantity"/>
+                                    <field name="uom_id" string="Unit of Measure"/>
+                                    <field name="price"/>
+                                    <field name="total_price" sum="Total"/>
+                                </list>
+                            </field>
+                        </page>
+
+                        <!-- Tab 4: Barang/Obat Pulang -->
+                        <page string="Barang/Obat Pulang" name="barang">
+                            <field name="barang_ids">
+                                <list editable="bottom">
+                                    <field name="product_id" string="Item"/>
+                                    <field name="name"/>
+                                    <field name="quantity"/>
+                                    <field name="uom_id" string="Unit of Measure"/>
+                                    <field name="price"/>
+                                    <field name="total_price" sum="Total"/>
+                                </list>
+                            </field>
+                        </page>
+
+                        <!-- Tab 5: Note -->
+                        <page string="Note" name="note">
+                            <field name="note" placeholder="Add internal notes here..."/>
+                        </page>
+
+                        <!-- Tab 6: PDF Pemeriksaan -->
+                        <page string="PDF Pemeriksaan" name="pdf_pemeriksaan">
+                            <div class="text-center mt-3 mb-3">
+                                <button name="%(pet_clinic.action_report_visitation_medical_record)d"
+                                        string="Generate PDF Rekam Medis"
+                                        type="action"
+                                        class="btn-primary"
+                                        icon="fa-print"/>
+                            </div>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <!-- Visitation Search View -->
+    <record id="view_pet_clinic_visitation_search" model="ir.ui.view">
+        <field name="name">pet_clinic.visitation.search</field>
+        <field name="model">pet_clinic.visitation</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="owner_id"/>
+                <field name="pet_id"/>
+                <field name="doctor_id"/>
+                <filter name="draft" string="Draft" domain="[('state','=','draft')]"/>
+                <filter name="in_process" string="In Process" domain="[('state','=','in_process')]"/>
+                <filter name="done" string="Done" domain="[('state','=','done')]"/>
+                <filter name="today" string="Today" domain="[('date_start','&gt;=', (context_today()).strftime('%Y-%m-%d')),('date_start','&lt;',(context_today()+datetime.timedelta(days=1)).strftime('%Y-%m-%d'))]"/>
+                <group expand="0" string="Group By">
+                    <filter name="group_state" string="Status" context="{'group_by':'state'}"/>
+                    <filter name="group_doctor" string="Doctor" context="{'group_by':'doctor_id'}"/>
+                    <filter name="group_lokasi" string="Location" context="{'group_by':'lokasi_pemeriksaan'}"/>
+                    <filter name="group_penanganan" string="Penanganan" context="{'group_by':'penanganan'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Visitation Action -->
+    <record id="action_pet_clinic_visitation" model="ir.actions.act_window">
+        <field name="name">Visitations</field>
+        <field name="res_model">pet_clinic.visitation</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first visitation!
+            </p>
+        </field>
+    </record>
+
+</odoo>
