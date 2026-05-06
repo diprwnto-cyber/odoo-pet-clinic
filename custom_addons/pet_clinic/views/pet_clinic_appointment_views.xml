@@ -51,6 +51,7 @@
                     </div>
                     <group>
                         <group>
+                            <field name="location_id"/>
                             <field name="owner_id"/>
                             <field name="pet_id" domain="[('owner_id', '=', owner_id)]"/>
                             <field name="service_id"/>
@@ -59,7 +60,6 @@
                         <group>
                             <field name="date"/>
                             <field name="room_id"/>
-                            <field name="location_id"/>
                         </group>
                     </group>
                 </sheet>

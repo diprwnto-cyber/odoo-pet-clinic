@@ -34,6 +34,7 @@
         'security/ir.model.access.csv',
         # Data
         'data/ir_sequence_data.xml',
+        'data/master_data.xml',
         # Reports (must load before views that reference report actions)
         'report/pet_clinic_report.xml',
         # Views
@@ -51,6 +52,7 @@
             'pet_clinic/static/src/js/dashboard.js',
             'pet_clinic/static/src/xml/dashboard_templates.xml',
             'pet_clinic/static/src/css/dashboard.css',
+            'pet_clinic/static/src/css/navbar.css',
         ],
     },
     'application': True,

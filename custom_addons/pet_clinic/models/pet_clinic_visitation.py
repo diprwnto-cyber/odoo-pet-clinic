@@ -35,6 +35,7 @@ class PetClinicVisitation(models.Model):
     )
     room_id = fields.Many2one(
         'pet_clinic.room', string='Room', tracking=True,
+        domain="[('lokasi_ids', '=?', lokasi_pemeriksaan)]",
     )
     price_list_id = fields.Many2one(
         'product.pricelist', string='Price List',
@@ -75,9 +76,11 @@ class PetClinicVisitation(models.Model):
     # Medical Records Tab
     doctor_id = fields.Many2one(
         'pet_clinic.doctor', string='Doctor', tracking=True,
+        domain="[('lokasi_ids', '=?', lokasi_pemeriksaan)]",
     )
     paramedis_id = fields.Many2one(
         'pet_clinic.paramedis', string='Paramedis',
+        domain="[('lokasi_ids', '=?', lokasi_pemeriksaan)]",
     )
 
     # Anamnesa Section

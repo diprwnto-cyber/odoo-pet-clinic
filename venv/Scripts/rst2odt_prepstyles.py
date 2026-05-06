@@ -1,4 +1,4 @@
-#!D:\UBIG\Proyek\odoo-pet-clinic\odoo pet clinic\odoo\venv\Scripts\python.exe
+#!C:\UBIG\PROYEK\odoo pet clinic\venv\Scripts\python.exe
 
 # Copyright: This module has been placed in the public domain.
 
