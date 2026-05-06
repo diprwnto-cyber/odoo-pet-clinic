@@ -1,0 +1,27 @@
+# Odoo files
+odoo/
+.odoo_data/
+addons/
+
+# Python Virtual Environment
+venv/
+env/
+__pycache__/
+*.pyc
+
+# IDEs
+.vscode/
+.idea/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Any CSV or DB dump you don't want to upload
+*.csv
+*.sql
+
+# Repository Odoo
+odoo/
+odoo*
+odoo/*

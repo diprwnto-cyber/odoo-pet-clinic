@@ -1,4 +1,4 @@
-#!D:\UBIG\Proyek\odoo-pet-clinic\odoo pet clinic\odoo\venv\Scripts\python.exe
+#!C:\UBIG\PROYEK\odoo pet clinic\venv\Scripts\python.exe
 
 # $Id: rst2xetex.py 9115 2022-07-28 17:06:24Z milde $
 # Author: Guenter Milde

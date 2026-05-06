@@ -8,7 +8,7 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
-set VIRTUAL_ENV=D:\UBIG\Proyek\odoo-pet-clinic\odoo pet clinic\odoo\venv
+set VIRTUAL_ENV=C:\UBIG\PROYEK\odoo pet clinic\venv
 
 if not defined PROMPT set PROMPT=$P$G
 

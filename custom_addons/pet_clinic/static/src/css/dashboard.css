@@ -1,7 +1,9 @@
 .o_pet_clinic_dashboard {
     padding: 20px;
     background-color: #f4f6f9;
-    min-height: 100vh;
+    height: 100%;
+    overflow-y: auto;
+    box-sizing: border-box;
     font-family: 'Segoe UI', Roboto, sans-serif;
 }
 
@@ -47,13 +49,13 @@
 }
 
 .pc-select:focus, .pc-input:focus {
-    border-color: #714B67;
+    border-color: #2b5278;
     outline: none;
-    box-shadow: 0 0 0 3px rgba(113,75,103,0.15);
+    box-shadow: 0 0 0 3px rgba(43,82,120,0.15);
 }
 
 .pc-btn-process {
-    background: linear-gradient(135deg, #714B67, #8B5E83);
+    background: linear-gradient(135deg, #2b5278, #3b6b9a);
     border: none;
     border-radius: 8px;
     padding: 8px 24px;
@@ -63,9 +65,9 @@
 }
 
 .pc-btn-process:hover {
-    background: linear-gradient(135deg, #5a3a52, #714B67);
+    background: linear-gradient(135deg, #1e3a5f, #2b5278);
     transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(113,75,103,0.3);
+    box-shadow: 0 4px 12px rgba(43,82,120,0.3);
 }
 
 /* ============================================ */
@@ -199,7 +201,7 @@
 }
 
 .pc-section-header h5 i {
-    color: #714B67;
+    color: #2b5278;
 }
 
 .pc-section-filters {
@@ -236,7 +238,7 @@
 }
 
 .pc-section-card .table tbody tr:hover {
-    background-color: #f8f0f6;
+    background-color: #f0f4f8;
 }
 
 /* ============================================ */
