@@ -23,16 +23,18 @@ class PetClinicAppointment(models.Model):
     )
     room_id = fields.Many2one(
         'pet_clinic.room', string='Room',
+        domain="[('lokasi_ids', '=?', location_id)]",
     )
     location_id = fields.Many2one(
         'pet_clinic.lokasi', string='Location',
     )
     service_id = fields.Many2one(
         'product.product', string='Service',
-        domain=[('type', '=', 'service')],
+        domain="[('type', '=', 'service'), ('lokasi_ids', '=?', location_id)]",
     )
     doctor_id = fields.Many2one(
         'pet_clinic.doctor', string='Doctor', tracking=True,
+        domain="[('lokasi_ids', '=?', location_id)]",
     )
     date = fields.Datetime(
         string='Date', required=True, tracking=True,

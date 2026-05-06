@@ -1,0 +1,69 @@
+/* Override Odoo Navbar Color to Telegram Dark Blue */
+:root {
+    --o-navbar-background: #2b5278 !important;
+    --o-brand-odoo: #2b5278 !important;
+}
+
+header.o_navbar,
+.o_navbar,
+.o_main_navbar {
+    background-color: #2b5278 !important;
+    border-bottom: 1px solid #1e3a5f !important;
+}
+
+.o_navbar .o_menu_sections,
+.o_main_navbar .o_menu_sections,
+.o_navbar .o_menu_systray,
+.o_main_navbar .o_menu_systray,
+.o_navbar_apps_menu,
+.o_menu_brand,
+.o_navbar .o_nav_entry,
+.o_main_navbar .o_nav_entry,
+.o_navbar .dropdown-toggle,
+.o_navbar > nav,
+.o_navbar > div {
+    background-color: #2b5278 !important;
+    border: none !important;
+}
+
+/* Hover effects */
+.o_navbar .o_nav_entry:hover,
+.o_navbar .dropdown-toggle:hover,
+.o_navbar .o_menu_brand:hover,
+.o_navbar .o_menu_sections > a:hover,
+.o_navbar .o_menu_sections .o_nav_entry:hover {
+    background-color: #1e3a5f !important;
+}
+
+/* Ensure dropdown menus retain their normal background (usually white) */
+.o_navbar .dropdown-menu,
+.o_main_navbar .dropdown-menu,
+.o_navbar .dropdown-menu *,
+.o_main_navbar .dropdown-menu * {
+    background-color: initial;
+}
+
+/* Override Default Odoo Primary Buttons */
+.btn-primary, 
+.o_form_view .o_form_button_save,
+.o_form_view .o_form_button_create {
+    background-color: #2b5278 !important;
+    border-color: #2b5278 !important;
+    color: #ffffff !important;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.o_form_view .o_form_button_save:hover,
+.o_form_view .o_form_button_create:hover {
+    background-color: #1e3a5f !important;
+    border-color: #1e3a5f !important;
+    color: #ffffff !important;
+}
+
+/* Also update the primary color variable if applicable */
+:root {
+    --o-brand-primary: #2b5278 !important;
+    --bs-primary: #2b5278 !important;
+}

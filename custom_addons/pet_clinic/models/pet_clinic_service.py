@@ -24,15 +24,21 @@ class PetClinicService(models.Model):
     nama_pemilik = fields.Many2one(
         'pet_clinic.client', string='Owner',
     )
+    visitation_lokasi_id = fields.Many2one(
+        'pet_clinic.lokasi', related='visitation_id.lokasi_pemeriksaan',
+        string='Lokasi Pemeriksaan', store=True,
+    )
     service_type = fields.Many2one(
         'product.product', string='Service',
-        domain=[('type', '=', 'service')],
+        domain="[('type', '=', 'service'), ('lokasi_ids', '=?', visitation_lokasi_id)]",
     )
     dokter_penerima = fields.Many2one(
         'pet_clinic.doctor', string='Dokter Penerima',
+        domain="[('lokasi_ids', '=?', visitation_lokasi_id)]",
     )
     dokter_dp_ip = fields.Many2one(
         'pet_clinic.doctor', string='Dokter DP/IP',
+        domain="[('lokasi_ids', '=?', visitation_lokasi_id)]",
     )
     date_handling = fields.Date(
         string='Date Handling', default=fields.Date.today,

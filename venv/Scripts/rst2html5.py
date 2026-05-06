@@ -1,4 +1,4 @@
-#!D:\UBIG\Proyek\odoo-pet-clinic\odoo pet clinic\odoo\venv\Scripts\python.exe
+#!C:\UBIG\PROYEK\odoo pet clinic\venv\Scripts\python.exe
 # :Copyright: © 2015 Günter Milde.
 # :License: Released under the terms of the `2-Clause BSD license`_, in short:
 #
