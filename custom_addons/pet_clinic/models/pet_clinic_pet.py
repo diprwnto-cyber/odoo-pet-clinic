@@ -33,6 +33,7 @@ class PetClinicPet(models.Model):
     )
     breed_id = fields.Many2one(
         'pet_clinic.pet_breed', string='Breed', tracking=True,
+        domain="[('type_id', '=', type_id)]",
     )
     owner_id = fields.Many2one(
         'pet_clinic.client', string='Owner', tracking=True,
@@ -68,6 +69,11 @@ class PetClinicPet(models.Model):
     )
 
     active = fields.Boolean(default=True)
+
+    @api.onchange('type_id')
+    def _onchange_type_id(self):
+        """Reset breed when pet type changes to prevent mismatched breed."""
+        self.breed_id = False
 
     @api.depends('date_of_birth')
     def _compute_age(self):

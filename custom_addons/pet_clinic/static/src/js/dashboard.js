@@ -63,35 +63,47 @@ class PetClinicDashboard extends Component {
     }
 
     async _fetchDashboardData() {
-        const domain = [];
+        // KPI Cards
+        const visitationDomain = [];
+        const appointmentDomain = [];
+        const doctorDomain = [["active", "=", true]];
+        const memberDomain = [["active", "=", true]];
+        const petDomain = [["active", "=", true]];
+
         if (this.state.lokasi_id) {
-            domain.push(["lokasi_pemeriksaan", "=", parseInt(this.state.lokasi_id)]);
+            const lokasiId = parseInt(this.state.lokasi_id);
+            visitationDomain.push(["lokasi_pemeriksaan", "=", lokasiId]);
+            appointmentDomain.push(["location_id", "=", lokasiId]);
+            doctorDomain.push(["lokasi_ids", "in", [lokasiId]]);
+            // Filter members/pets by those who have visited this branch
+            memberDomain.push(["pet_ids.visitation_ids.lokasi_pemeriksaan", "=", lokasiId]);
+            petDomain.push(["visitation_ids.lokasi_pemeriksaan", "=", lokasiId]);
         }
 
-        // KPI Cards
-        const visitDomain = [...domain];
         if (this.state.date_from) {
-            visitDomain.push(["date_start", ">=", this.state.date_from + " 00:00:00"]);
+            visitationDomain.push(["date_start", ">=", this.state.date_from + " 00:00:00"]);
+            appointmentDomain.push(["date", ">=", this.state.date_from + " 00:00:00"]);
         }
         if (this.state.date_to) {
-            visitDomain.push(["date_start", "<=", this.state.date_to + " 23:59:59"]);
+            visitationDomain.push(["date_start", "<=", this.state.date_to + " 23:59:59"]);
+            appointmentDomain.push(["date", "<=", this.state.date_to + " 23:59:59"]);
         }
 
         this.state.visitationCount = await this.orm.searchCount(
             "pet_clinic.visitation",
-            visitDomain
+            visitationDomain
         );
         this.state.memberCount = await this.orm.searchCount(
             "pet_clinic.client",
-            [["active", "=", true]]
+            memberDomain
         );
         this.state.petCount = await this.orm.searchCount(
             "pet_clinic.pet",
-            [["active", "=", true]]
+            petDomain
         );
         this.state.doctorCount = await this.orm.searchCount(
             "pet_clinic.doctor",
-            [["active", "=", true]]
+            doctorDomain
         );
 
         // Service Data
@@ -106,10 +118,13 @@ class PetClinicDashboard extends Component {
     }
 
     async _fetchServiceData() {
-        const dateDomain = this._getDateDomain(this.state.serviceFilter);
+        const domain = this._getDateDomain(this.state.serviceFilter);
+        if (this.state.lokasi_id) {
+            domain.push(["visitation_id.lokasi_pemeriksaan", "=", parseInt(this.state.lokasi_id)]);
+        }
         const services = await this.orm.readGroup(
             "pet_clinic.service",
-            dateDomain,
+            domain,
             ["service_type"],
             ["service_type"]
         );
@@ -121,10 +136,13 @@ class PetClinicDashboard extends Component {
     }
 
     async _fetchPenangananData() {
-        const dateDomain = this._getDateDomain(this.state.penangananFilter);
+        const domain = this._getDateDomain(this.state.penangananFilter);
+        if (this.state.lokasi_id) {
+            domain.push(["lokasi_pemeriksaan", "=", parseInt(this.state.lokasi_id)]);
+        }
         const penanganan = await this.orm.readGroup(
             "pet_clinic.visitation",
-            dateDomain,
+            domain,
             ["penanganan", "state"],
             ["penanganan", "state"],
             { lazy: false }
@@ -167,12 +185,16 @@ class PetClinicDashboard extends Component {
 
     async _fetchTodayVisitations() {
         const today = this._getToday();
+        const domain = [
+            ["date_start", ">=", today + " 00:00:00"],
+            ["date_start", "<=", today + " 23:59:59"],
+        ];
+        if (this.state.lokasi_id) {
+            domain.push(["lokasi_pemeriksaan", "=", parseInt(this.state.lokasi_id)]);
+        }
         const visitations = await this.orm.searchRead(
             "pet_clinic.visitation",
-            [
-                ["date_start", ">=", today + " 00:00:00"],
-                ["date_start", "<=", today + " 23:59:59"],
-            ],
+            domain,
             ["name", "owner_id", "pet_id", "doctor_id", "lokasi_pemeriksaan", "date_start"],
             { limit: 20 }
         );
@@ -181,12 +203,16 @@ class PetClinicDashboard extends Component {
 
     async _fetchTodayAppointments() {
         const today = this._getToday();
+        const domain = [
+            ["date", ">=", today + " 00:00:00"],
+            ["date", "<=", today + " 23:59:59"],
+        ];
+        if (this.state.lokasi_id) {
+            domain.push(["location_id", "=", parseInt(this.state.lokasi_id)]);
+        }
         const appointments = await this.orm.searchRead(
             "pet_clinic.appointment",
-            [
-                ["date", ">=", today + " 00:00:00"],
-                ["date", "<=", today + " 23:59:59"],
-            ],
+            domain,
             ["name", "owner_id", "pet_id", "doctor_id", "location_id", "date"],
             { limit: 20 }
         );
@@ -195,20 +221,29 @@ class PetClinicDashboard extends Component {
 
     async _fetchNotifData() {
         const today = this._getToday();
+        const visitDomain = [
+            ["date_start", ">=", today + " 00:00:00"],
+            ["date_start", "<=", today + " 23:59:59"],
+        ];
+        if (this.state.lokasi_id) {
+            visitDomain.push(["lokasi_pemeriksaan", "=", parseInt(this.state.lokasi_id)]);
+        }
+        
         const visitCount = await this.orm.searchCount(
             "pet_clinic.visitation",
-            [
-                ["date_start", ">=", today + " 00:00:00"],
-                ["date_start", "<=", today + " 23:59:59"],
-            ]
+            visitDomain
         );
         const reminderCount = await this.orm.searchCount(
             "pet_clinic.notif_reminder",
             []
         );
+        const memberDomain = [["active", "=", true]];
+        if (this.state.lokasi_id) {
+            memberDomain.push(["pet_ids.visitation_ids.lokasi_pemeriksaan", "=", parseInt(this.state.lokasi_id)]);
+        }
         const memberCount = await this.orm.searchCount(
             "pet_clinic.client",
-            [["active", "=", true]]
+            memberDomain
         );
         this.state.notifData = [
             { name: "Notif Kunjungan", count: visitCount },

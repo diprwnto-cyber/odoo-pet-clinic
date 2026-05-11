@@ -288,7 +288,7 @@
     <menuitem id="menu_reminder_visitation"
               name="Reminder Kunjungan"
               parent="menu_pet_clinic_reminder"
-              action="action_pet_clinic_visitation"
+              action="action_notif_after_service"
               sequence="30"/>
 
 </odoo>

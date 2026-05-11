@@ -36,6 +36,13 @@ class PetClinicAppointment(models.Model):
         'pet_clinic.doctor', string='Doctor', tracking=True,
         domain="[('lokasi_ids', '=?', location_id)]",
     )
+    groomer_id = fields.Many2one(
+        'pet_clinic.groomer', string='Groomer', tracking=True,
+        domain="[('lokasi_ids', '=?', location_id)]",
+    )
+    is_grooming = fields.Boolean(
+        string='Is Grooming', compute='_compute_is_grooming', store=True,
+    )
     date = fields.Datetime(
         string='Date', required=True, tracking=True,
     )
@@ -80,6 +87,22 @@ class PetClinicAppointment(models.Model):
                 rec.color = doctor_colors[rec.doctor_id.id]
             else:
                 rec.color = 0
+
+    @api.depends('service_id')
+    def _compute_is_grooming(self):
+        for rec in self:
+            if rec.service_id and rec.service_id.name:
+                rec.is_grooming = 'grooming' in rec.service_id.name.lower()
+            else:
+                rec.is_grooming = False
+
+    @api.onchange('service_id')
+    def _onchange_service_id(self):
+        """Reset doctor/groomer when service changes."""
+        if self.service_id and self.service_id.name and 'grooming' in self.service_id.name.lower():
+            self.doctor_id = False
+        else:
+            self.groomer_id = False
 
     @api.onchange('owner_id')
     def _onchange_owner_id(self):

@@ -26,7 +26,7 @@
                     </div>
                     <div class="pc-filter-item">
                         <button class="btn btn-primary pc-btn-process" t-on-click="onProcessClick">
-                            <i class="fa fa-refresh me-1"/> Proses
+                            <i class="fa fa-refresh me-1" title="Refresh"/> Proses
                         </button>
                     </div>
                 </div>
@@ -36,53 +36,53 @@
             <div class="pc-kpi-container">
                 <div class="pc-kpi-card pc-kpi-blue" t-on-click="openVisitations">
                     <div class="pc-kpi-icon">
-                        <i class="fa fa-stethoscope"/>
+                        <i class="fa fa-stethoscope" title="Visitations"/>
                     </div>
                     <div class="pc-kpi-info">
                         <span class="pc-kpi-value"><t t-esc="state.visitationCount"/></span>
                         <span class="pc-kpi-label">Kunjungan</span>
                     </div>
                     <div class="pc-kpi-more">
-                        <span>More Info <i class="fa fa-arrow-right"/></span>
+                        <span>More Info <i class="fa fa-arrow-right" title="Go to Visitations"/></span>
                     </div>
                 </div>
 
                 <div class="pc-kpi-card pc-kpi-green" t-on-click="openMembers">
                     <div class="pc-kpi-icon">
-                        <i class="fa fa-users"/>
+                        <i class="fa fa-users" title="Members"/>
                     </div>
                     <div class="pc-kpi-info">
                         <span class="pc-kpi-value"><t t-esc="state.memberCount"/></span>
                         <span class="pc-kpi-label">Member</span>
                     </div>
                     <div class="pc-kpi-more">
-                        <span>More Info <i class="fa fa-arrow-right"/></span>
+                        <span>More Info <i class="fa fa-arrow-right" title="Go to Members"/></span>
                     </div>
                 </div>
 
                 <div class="pc-kpi-card pc-kpi-orange" t-on-click="openPets">
                     <div class="pc-kpi-icon">
-                        <i class="fa fa-paw"/>
+                        <i class="fa fa-paw" title="Pets"/>
                     </div>
                     <div class="pc-kpi-info">
                         <span class="pc-kpi-value"><t t-esc="state.petCount"/></span>
                         <span class="pc-kpi-label">Hewan</span>
                     </div>
                     <div class="pc-kpi-more">
-                        <span>More Info <i class="fa fa-arrow-right"/></span>
+                        <span>More Info <i class="fa fa-arrow-right" title="Go to Pets"/></span>
                     </div>
                 </div>
 
                 <div class="pc-kpi-card pc-kpi-teal" t-on-click="openDoctors">
                     <div class="pc-kpi-icon">
-                        <i class="fa fa-user-md"/>
+                        <i class="fa fa-user-md" title="Doctors"/>
                     </div>
                     <div class="pc-kpi-info">
                         <span class="pc-kpi-value"><t t-esc="state.doctorCount"/></span>
                         <span class="pc-kpi-label">Dokter</span>
                     </div>
                     <div class="pc-kpi-more">
-                        <span>More Info <i class="fa fa-arrow-right"/></span>
+                        <span>More Info <i class="fa fa-arrow-right" title="Go to Doctors"/></span>
                     </div>
                 </div>
             </div>
@@ -93,7 +93,7 @@
                     <!-- Section Layanan -->
                     <div class="pc-section-card">
                         <div class="pc-section-header">
-                            <h5><i class="fa fa-cogs me-2"/>Layanan</h5>
+                            <h5><i class="fa fa-cogs me-2" title="Services Icon"/>Layanan</h5>
                             <div class="pc-section-filters">
                                 <button t-att-class="'btn btn-sm ' + (state.serviceFilter === 'today' ? 'btn-primary' : 'btn-outline-secondary')"
                                         t-on-click="() => this.onServiceFilterChange('today')">Today</button>
@@ -129,7 +129,7 @@
                     <!-- Section Penanganan -->
                     <div class="pc-section-card">
                         <div class="pc-section-header">
-                            <h5><i class="fa fa-medkit me-2"/>Penanganan</h5>
+                            <h5><i class="fa fa-medkit me-2" title="Treatment Icon"/>Penanganan</h5>
                             <div class="pc-section-filters">
                                 <button t-att-class="'btn btn-sm ' + (state.penangananFilter === 'today' ? 'btn-primary' : 'btn-outline-secondary')"
                                         t-on-click="() => this.onPenangananFilterChange('today')">Today</button>
@@ -169,7 +169,7 @@
                     <!-- Kunjungan Hari Ini -->
                     <div class="pc-section-card">
                         <div class="pc-section-header">
-                            <h5><i class="fa fa-calendar-check-o me-2"/>Kunjungan Hari Ini</h5>
+                            <h5><i class="fa fa-calendar-check-o me-2" title="Visitations Today Icon"/>Kunjungan Hari Ini</h5>
                         </div>
                         <table class="table table-sm table-hover">
                             <thead>
@@ -203,7 +203,7 @@
                     <!-- Janji Hari Ini -->
                     <div class="pc-section-card">
                         <div class="pc-section-header">
-                            <h5><i class="fa fa-clock-o me-2"/>Janji Hari Ini</h5>
+                            <h5><i class="fa fa-clock-o me-2" title="Appointments Today Icon"/>Janji Hari Ini</h5>
                         </div>
                         <table class="table table-sm table-hover">
                             <thead>
@@ -239,7 +239,7 @@
                 <div class="pc-section-row">
                     <div class="pc-section-card pc-section-full">
                         <div class="pc-section-header">
-                            <h5><i class="fa fa-bell me-2"/>Notif Hari Ini</h5>
+                            <h5><i class="fa fa-bell me-2" title="Notifications Today Icon"/>Notif Hari Ini</h5>
                         </div>
                         <table class="table table-sm table-hover">
                             <thead>
